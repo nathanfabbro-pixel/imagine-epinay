@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="vendor/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #0b0e1a;
+      }
+      body {
+        font-family: "Inter", -apple-system, "Segoe UI", sans-serif;
+      }
+
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #0b0e1a;
+
+        /* palette */
+        --accent: #38488f;
+        --accent-soft: rgba(56, 72, 143, 0.14);
+        --chrome-bg: #e8e8ee;
+        --chrome-border: #d5d5de;
+        --page-bg: #f0f0f2;
+        --card-bg: #fdfdff;
+        --text-primary: #1a1a2e;
+        --text-body: #3a3a52;
+      }
+
+      /* ---------- browser-scene ---------- */
+      #browser-scene {
+        position: absolute;
+        inset: 0;
+      }
+      .canvas-backdrop {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(120% 100% at 50% 0%, #1a2140 0%, #0b0e1a 65%);
+      }
+      .browser-frame {
+        position: absolute;
+        left: 210px;
+        top: 65px;
+        width: 1500px;
+        height: 950px;
+        border-radius: 16px;
+        overflow: hidden;
+        background: var(--chrome-bg);
+        box-shadow: 0 40px 90px rgba(0, 0, 0, 0.45);
+      }
+      .browser-titlebar {
+        position: relative;
+        width: 100%;
+        height: 56px;
+        background: var(--chrome-bg);
+        border-bottom: 1px solid var(--chrome-border);
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        gap: 16px;
+      }
+      .traffic-lights {
+        display: flex;
+        gap: 8px;
+      }
+      .traffic-lights span {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        display: inline-block;
+      }
+      .traffic-lights span:nth-child(1) {
+        background: #ec6a5e;
+      }
+      .traffic-lights span:nth-child(2) {
+        background: #f4bf4f;
+      }
+      .traffic-lights span:nth-child(3) {
+        background: #61c554;
+      }
+      .address-pill {
+        flex: 1;
+        max-width: 460px;
+        margin: 0 auto;
+        height: 32px;
+        border-radius: 16px;
+        background: #ffffff;
+        border: 1px solid var(--chrome-border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-size: 15px;
+        color: var(--text-body);
+      }
+      .address-pill .lock {
+        font-size: 13px;
+        opacity: 0.6;
+      }
+
+      .browser-content {
+        position: relative;
+        width: 1500px;
+        height: 894px;
+        overflow: hidden;
+        background: var(--page-bg);
+      }
+      .zoom-outer {
+        position: absolute;
+        inset: 0;
+        transform-origin: 50% 50%;
+        will-change: transform;
+      }
+      .zoom-inner {
+        position: absolute;
+        inset: 0;
+        will-change: transform;
+      }
+      .page-bg {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .page-card {
+        width: 780px;
+        background: var(--card-bg);
+        border-radius: 14px;
+        padding: 64px;
+        box-shadow: 2px 6px 30px rgba(0, 0, 0, 0.05);
+      }
+      .page-card h1 {
+        font-size: 60px;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 28px;
+        letter-spacing: -0.01em;
+      }
+      .page-card p {
+        font-size: 27px;
+        line-height: 1.55;
+        color: var(--text-body);
+        margin-bottom: 22px;
+      }
+      .page-card a {
+        display: inline-block;
+        color: var(--accent);
+        text-decoration: none;
+        font-size: 27px;
+        border-bottom: 2px solid var(--accent-soft);
+      }
+
+      /* callouts — siblings of the zoom wrappers so they never get scaled */
+      .callout {
+        position: absolute;
+        left: 50%;
+        bottom: 56px;
+        transform: translateX(-50%);
+        background: var(--text-primary);
+        color: #fff;
+        font-size: 24px;
+        font-weight: 600;
+        padding: 14px 26px;
+        border-radius: 999px;
+        white-space: nowrap;
+        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
+        opacity: 0;
+        z-index: 10;
+      }
+
+      /* cursor + ripple */
+      #cursor {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 34px;
+        height: 34px;
+        margin-left: -6px;
+        margin-top: -4px;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 20;
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.35));
+      }
+      .ripple {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 90px;
+        height: 90px;
+        margin-left: -45px;
+        margin-top: -45px;
+        border-radius: 50%;
+        border: 2px solid var(--accent);
+        opacity: 0;
+        pointer-events: none;
+        z-index: 15;
+      }
+
+      /* ---------- closing-scene ---------- */
+      #closing-scene {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(120% 100% at 50% 0%, #1a2140 0%, #0b0e1a 65%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #closing-content {
+        text-align: center;
+        opacity: 0;
+      }
+      .closing-wordmark {
+        font-size: 92px;
+        font-weight: 700;
+        color: #ffffff;
+        letter-spacing: -0.01em;
+      }
+      .closing-wordmark span {
+        color: #7c8ce0;
+      }
+      .closing-rule {
+        width: 0;
+        height: 3px;
+        background: #7c8ce0;
+        margin: 28px auto 26px;
+      }
+      .closing-tagline {
+        font-size: 30px;
+        color: #c7cbe6;
+        font-weight: 500;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="10"
+      data-width="1920"
+      data-height="1080"
+    >
+      <div
+        id="browser-scene"
+        class="clip"
+        data-start="0"
+        data-duration="8.7"
+        data-track-index="0"
+        data-layout-allow-occlusion="true"
+        data-layout-allow-overlap="true"
+      >
+        <div class="canvas-backdrop"></div>
+
+        <div class="browser-frame" id="browser-frame">
+          <div class="browser-titlebar">
+            <div class="traffic-lights"><span></span><span></span><span></span></div>
+            <div class="address-pill"><span class="lock">&#128274;</span>example.com</div>
+          </div>
+
+          <div
+            class="browser-content"
+            id="browser-content"
+            data-layout-allow-overflow="true"
+          >
+            <div class="zoom-outer" id="zoom-outer">
+              <div class="zoom-inner" id="zoom-inner">
+                <div class="page-bg" data-layout-allow-overflow="true">
+                  <div class="page-card">
+                    <h1 id="headline-el">Example Domain</h1>
+                    <p id="desc-el">
+                      This domain is for use in illustrative examples in documents. You may use
+                      this domain in literature without prior coordination or asking for
+                      permission.
+                    </p>
+                    <p><a id="link-el" href="#">More information...</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="callout" id="callout-1">The domain, ready for you</div>
+            <div class="callout" id="callout-2">Simple, standards-based, yours to build on</div>
+
+            <img
+              id="cursor"
+              src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 24 24'%3E%3Cpath d='M3 2l6.5 18.5 3-7.5 7.5-3z' fill='white' stroke='black' stroke-width='1.2' stroke-linejoin='round'/%3E%3C/svg%3E"
+            />
+            <div class="ripple" id="ripple-1"></div>
+            <div class="ripple" id="ripple-2"></div>
+            <div class="ripple" id="ripple-3"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="closing-scene" class="clip" data-start="8.3" data-duration="1.7" data-track-index="1">
+        <div id="closing-content">
+          <div class="closing-wordmark">example<span>.com</span></div>
+          <div class="closing-rule" id="closing-rule"></div>
+          <div class="closing-tagline">Yours to build on.</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+
+      async function setup() {
+        await document.fonts.ready;
+
+        const contentEl = document.getElementById("browser-content");
+        const contentRect = contentEl.getBoundingClientRect();
+        const W = contentRect.width;
+        const H = contentRect.height;
+        const cx = contentRect.left + W / 2;
+        const cy = contentRect.top + H / 2;
+
+        function offsetFor(el) {
+          const r = el.getBoundingClientRect();
+          return {
+            x: r.left + r.width / 2 - cx,
+            y: r.top + r.height / 2 - cy,
+            w: r.width,
+            h: r.height,
+          };
+        }
+
+        function headroomScale(desired, dims) {
+          const maxScale = Math.min((0.88 * W) / dims.w, (0.88 * H) / dims.h);
+          return Math.min(desired, maxScale);
+        }
+
+        const headline = offsetFor(document.getElementById("headline-el"));
+        const desc = offsetFor(document.getElementById("desc-el"));
+        const link = offsetFor(document.getElementById("link-el"));
+
+        const scaleHeadline = headroomScale(1.9, headline);
+        const scaleDesc = headroomScale(1.55, desc);
+
+        const tl = gsap.timeline({ paused: true });
+
+        tl.set(".ripple", { scale: 0 }, 0);
+
+        // --- entrance: browser frame settles in ---
+        tl.from(
+          "#browser-frame",
+          { autoAlpha: 0, scale: 0.94, y: 24, duration: 0.6, ease: "power2.out" },
+          0,
+        );
+
+        // --- zoom 1: push into the headline ---
+        const ZOOM1_AT = 0.9;
+        const ZOOM1_DUR = 0.9;
+        tl.to(
+          "#zoom-outer",
+          { scale: scaleHeadline, duration: ZOOM1_DUR, ease: "power3.inOut" },
+          ZOOM1_AT,
+        );
+        tl.to(
+          "#zoom-inner",
+          { x: -headline.x, y: -headline.y, duration: ZOOM1_DUR, ease: "power3.inOut" },
+          ZOOM1_AT,
+        );
+
+        tl.fromTo(
+          "#callout-1",
+          { autoAlpha: 0, y: 16 },
+          { autoAlpha: 1, y: 0, duration: 0.4, ease: "back.out(1.4)" },
+          1.9,
+        );
+        tl.to("#callout-1", { autoAlpha: 0, duration: 0.25 }, 3.4);
+
+        // --- zoom out to full page ---
+        const ZOOMOUT1_AT = 3.5;
+        tl.to("#zoom-outer", { scale: 1, duration: 0.7, ease: "power3.inOut" }, ZOOMOUT1_AT);
+        tl.to("#zoom-inner", { x: 0, y: 0, duration: 0.7, ease: "power3.inOut" }, ZOOMOUT1_AT);
+
+        // --- zoom 2: push into the description ---
+        const ZOOM2_AT = 4.4;
+        const ZOOM2_DUR = 0.7;
+        tl.to("#zoom-outer", { scale: scaleDesc, duration: ZOOM2_DUR, ease: "power3.inOut" }, ZOOM2_AT);
+        tl.to(
+          "#zoom-inner",
+          { x: -desc.x, y: -desc.y, duration: ZOOM2_DUR, ease: "power3.inOut" },
+          ZOOM2_AT,
+        );
+
+        tl.fromTo(
+          "#callout-2",
+          { autoAlpha: 0, y: 16 },
+          { autoAlpha: 1, y: 0, duration: 0.4, ease: "back.out(1.4)" },
+          5.2,
+        );
+        tl.to("#callout-2", { autoAlpha: 0, duration: 0.25 }, 6.5);
+
+        // --- zoom out to full page ---
+        const ZOOMOUT2_AT = 6.6;
+        tl.to("#zoom-outer", { scale: 1, duration: 0.6, ease: "power3.inOut" }, ZOOMOUT2_AT);
+        tl.to("#zoom-inner", { x: 0, y: 0, duration: 0.6, ease: "power3.inOut" }, ZOOMOUT2_AT);
+
+        // --- cursor click on "More information..." ---
+        const CURSOR_START_X = W * 0.36;
+        const CURSOR_START_Y = H * 0.4;
+        tl.set("#cursor", { x: CURSOR_START_X, y: CURSOR_START_Y }, 7.2);
+        tl.fromTo("#cursor", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.2 }, 7.2);
+
+        const MOVE_AT = 7.3;
+        const MOVE_DUR = 0.5;
+        tl.to("#cursor", { x: link.x, y: link.y, duration: MOVE_DUR, ease: "power3.out" }, MOVE_AT);
+
+        const CLICK_AT = MOVE_AT + MOVE_DUR + 0.05;
+        tl.to(
+          "#cursor",
+          { scale: 0.85, duration: 0.08, ease: "power2.in", yoyo: true, repeat: 1 },
+          CLICK_AT,
+        );
+        tl.to(
+          "#link-el",
+          { scale: 0.95, duration: 0.08, ease: "power2.in", yoyo: true, repeat: 1 },
+          CLICK_AT,
+        );
+
+        const RIPPLE_AT = CLICK_AT + 0.05;
+        tl.set([".ripple"], { x: link.x, y: link.y }, RIPPLE_AT);
+        tl.set([".ripple"], { opacity: 1 }, RIPPLE_AT);
+        tl.to(
+          [".ripple"],
+          {
+            scale: 4,
+            opacity: 0,
+            duration: 0.6,
+            ease: "power2.out",
+            stagger: 0.08,
+            immediateRender: false,
+          },
+          RIPPLE_AT,
+        );
+
+        // --- closing card ---
+        tl.fromTo(
+          "#closing-content",
+          { autoAlpha: 0, scale: 0.92 },
+          { autoAlpha: 1, scale: 1, duration: 0.5, ease: "power2.out" },
+          8.3,
+        );
+        tl.to("#closing-rule", { width: 160, duration: 0.5, ease: "power2.out" }, 8.5);
+
+        tl.seek(0);
+        window.__timelines["main"] = tl;
+      }
+
+      setup();
+    </script>
+  </body>
+</html>

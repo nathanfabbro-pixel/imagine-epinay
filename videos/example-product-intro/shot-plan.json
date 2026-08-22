@@ -1,0 +1,26 @@
+{
+  "category": "webpage",
+  "duration_s": 10,
+  "fps": 30,
+  "canvas": { "w": 1920, "h": 1080, "aspect": "16:9" },
+  "style": "clean, confident product-launch energy — crisp light UI, single accent color, fast punchy reveals",
+  "palette": "derive-from-asset",
+  "font": "Inter",
+  "beats": [0.9, 1.9, 3.5, 4.4, 5.2, 6.6, 7.3, 7.85, 8.3],
+  "export": "mp4",
+  "asset_needs": [
+    { "role": "hero", "kind": "web", "source": "https://example.com", "treatment": "none" }
+  ],
+  "block": null,
+  "customize": {},
+  "content": {
+    "url": "https://example.com",
+    "capture": "assets/capture/example-com/page.html",
+    "capture_note": "Manual reconstruction of example.com's known-stable public markup; live hyperframes capture was blocked by this session's network egress policy (see assets/capture/example-com/index.md).",
+    "highlights": [
+      { "selector": "#headline-el", "label": "The domain, ready for you" },
+      { "selector": "#desc-el", "label": "Simple, standards-based, yours to build on" },
+      { "selector": "#link-el", "label": "cursor click demo" }
+    ]
+  }
+}
