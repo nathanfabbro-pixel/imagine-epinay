@@ -1,0 +1,30 @@
+{
+  "name": "imagine-epinay-video",
+  "version": "1.0.0",
+  "description": "Outillage vidéo : HyperFrames, Remotion, FFmpeg",
+  "scripts": {
+    "setup": "bash scripts/setup.sh",
+    "verify": "bash scripts/verify.sh",
+    "hf:preview": "cd hf-demo && hyperframes preview",
+    "hf:check": "cd hf-demo && hyperframes check",
+    "hf:render": "cd hf-demo && hyperframes render -o ../out/hf-demo.mp4",
+    "remotion:studio": "remotion studio",
+    "remotion:render": "remotion render Demo out/remotion-demo.mp4",
+    "typecheck": "tsc"
+  },
+  "dependencies": {
+    "@remotion/bundler": "^4.0.539",
+    "@remotion/cli": "^4.0.539",
+    "@remotion/renderer": "^4.0.539",
+    "gsap": "^3.14.2",
+    "hyperframes": "^0.8.209",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "remotion": "^4.0.539"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "typescript": "^7.0.2"
+  },
+  "private": true
+}
