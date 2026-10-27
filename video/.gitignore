@@ -1,4 +1,4 @@
 node_modules/
 out/
-hf-demo/renders/
-hf-demo/.hyperframes/
+renders/
+.hyperframes/

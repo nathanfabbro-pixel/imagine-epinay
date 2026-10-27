@@ -1,0 +1,135 @@
+<template>
+  <style>
+    @font-face { font-family: "Fraunces"; font-weight: 900; src: url("assets/fonts/fraunces-latin-900-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Fraunces"; font-weight: 700; font-style: italic; src: url("assets/fonts/fraunces-latin-700-italic.woff2") format("woff2"); }
+    @font-face { font-family: "DM Sans"; font-weight: 500; src: url("assets/fonts/dm-sans-latin-500-normal.woff2") format("woff2"); }
+    @font-face { font-family: "DM Sans"; font-weight: 700; src: url("assets/fonts/dm-sans-latin-700-normal.woff2") format("woff2"); }
+
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    #fin-ground {
+      position: absolute;
+      inset: 0;
+      background: #fafaf8;
+    }
+    #fin-text {
+      position: absolute;
+      top: 250px;
+      left: 70px;
+      right: 70px;
+    }
+    #fin-l1 {
+      font-family: "Fraunces", serif;
+      font-weight: 900;
+      font-size: 74px;
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      color: #1c1228;
+    }
+    #fin-l2 {
+      margin-top: 44px;
+      font-family: "DM Sans", sans-serif;
+      font-weight: 500;
+      font-size: 46px;
+      color: #6b6478;
+    }
+    #fin-l3 {
+      margin-top: 10px;
+      font-family: "Fraunces", serif;
+      font-weight: 900;
+      font-size: 64px;
+      line-height: 1.08;
+      letter-spacing: -0.015em;
+      color: #5b2d8e;
+    }
+    #fin-l3 em {
+      font-style: italic;
+      font-weight: 700;
+      color: #3a8c3f;
+    }
+    #fin-logo {
+      position: absolute;
+      top: 900px;
+      left: 50%;
+      width: 500px;
+      margin-left: -250px;
+    }
+    #fin-cta {
+      position: absolute;
+      top: 1222px;
+      left: 0;
+      right: 0;
+      text-align: center;
+    }
+    #fin-cta span {
+      display: inline-block;
+      font-family: "DM Sans", sans-serif;
+      font-weight: 700;
+      font-size: 40px;
+      color: #fff;
+      background: #5b2d8e;
+      padding: 16px 40px;
+      border-radius: 100px;
+    }
+    #fin-leaves {
+      position: absolute;
+      left: 0;
+      top: 1380px;
+      width: 1080px;
+      height: 540px;
+    }
+  </style>
+
+  <div id="root" data-composition-id="fin" data-width="1080" data-height="1920">
+    <div id="fin-ground"></div>
+
+    <div id="fin-text">
+      <div id="fin-l1">Demain, il faudra de toute façon investir.</div>
+      <div id="fin-l2">Refaire à l'identique…</div>
+      <div id="fin-l3">…ou préparer nos écoles <em>aux étés qui viennent&nbsp;?</em></div>
+    </div>
+
+    <img id="fin-logo" src="assets/logo-big.png" alt="Imagine Épinay — Pour un avenir solidaire" />
+    <div id="fin-cta"><span>Donnez votre avis → Consultations</span></div>
+
+    <!-- décor bas de cadre (zone d'interface des réseaux) -->
+    <svg id="fin-leaves" viewBox="0 0 1080 540" data-layout-ignore>
+      <rect x="0" y="300" width="1080" height="240" fill="#e6f4e7" />
+      <g fill="none" stroke="#5cb860" stroke-width="6" stroke-linecap="round">
+        <path class="fin-stem" d="M140 540 C 150 420 190 330 260 260" />
+        <path class="fin-stem" d="M900 540 C 890 430 850 340 780 280" />
+      </g>
+      <g fill="#5cb860">
+        <path class="fin-leaf" d="M196 360 c -50 -10 -80 -50 -76 -90 c 44 4 76 40 76 90 z" />
+        <path class="fin-leaf" d="M232 300 c 40 -30 90 -30 116 -2 c -36 30 -84 30 -116 2 z" />
+        <path class="fin-leaf" d="M846 370 c 50 -10 80 -50 76 -90 c -44 4 -76 40 -76 90 z" />
+        <path class="fin-leaf" d="M806 316 c -40 -30 -90 -30 -116 -2 c 36 30 84 30 116 2 z" />
+      </g>
+    </svg>
+  </div>
+
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+
+      // Iris onto the light ground.
+      tl.fromTo("#fin-ground", { clipPath: "circle(0% at 50% 50%)" }, { clipPath: "circle(75% at 50% 50%)", duration: 0.55, ease: "power2.inOut" }, 0);
+
+      tl.fromTo("#fin-l1", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, 0.55);
+      tl.fromTo("#fin-l2", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.45, ease: "expo.out" }, 2.2);
+      tl.fromTo("#fin-l3", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, 3.2);
+
+      tl.fromTo("#fin-logo", { opacity: 0, scale: 0.92 }, { opacity: 1, scale: 1, duration: 0.6, ease: "expo.out" }, 5.0);
+      tl.fromTo("#fin-cta span", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.4)" }, 5.4);
+
+      document.querySelectorAll("#fin-leaves .fin-stem").forEach((p) => gsap.set(p, { strokeDasharray: 340, strokeDashoffset: 340 }));
+      tl.to("#fin-leaves .fin-stem", { strokeDashoffset: 0, duration: 1.0, stagger: 0.2, ease: "power2.out" }, 0.6);
+      tl.fromTo("#fin-leaves .fin-leaf", { scale: 0, transformOrigin: "50% 100%" }, { scale: 1, duration: 0.5, stagger: 0.12, ease: "back.out(1.6)" }, 1.2);
+
+      window.__timelines["fin"] = tl;
+    })();
+  </script>
+</template>

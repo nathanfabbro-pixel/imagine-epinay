@@ -1,0 +1,400 @@
+<template>
+  <style>
+    @font-face { font-family: "Fraunces"; font-weight: 700; src: url("assets/fonts/fraunces-latin-700-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Fraunces"; font-weight: 900; src: url("assets/fonts/fraunces-latin-900-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Fraunces"; font-weight: 700; font-style: italic; src: url("assets/fonts/fraunces-latin-700-italic.woff2") format("woff2"); }
+    @font-face { font-family: "DM Sans"; font-weight: 400; src: url("assets/fonts/dm-sans-latin-400-normal.woff2") format("woff2"); }
+    @font-face { font-family: "DM Sans"; font-weight: 700; src: url("assets/fonts/dm-sans-latin-700-normal.woff2") format("woff2"); }
+
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #fafaf8;
+      --violet: #5b2d8e;
+      --vert: #3a8c3f;
+      --vert-mid: #5cb860;
+      --encre: #1c1228;
+      --chaud: #d9531e;
+      --eau: #2f7fc1;
+    }
+    #cour-logo {
+      position: absolute;
+      top: 190px;
+      left: 50%;
+      width: 240px;
+      margin-left: -120px;
+    }
+    #cour-text {
+      position: absolute;
+      top: 360px;
+      left: 70px;
+      right: 70px;
+      height: 440px;
+    }
+    .cour-banner {
+      display: inline-block;
+      font-family: "Oswald", sans-serif;
+      font-weight: 700;
+      font-size: 46px;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: #fff;
+      background: var(--vert);
+      padding: 6px 26px 8px;
+      border-radius: 6px;
+    }
+    .cour-line {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      font-family: "Fraunces", serif;
+      font-weight: 900;
+      font-size: 78px;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--encre);
+    }
+    .cour-line em {
+      font-style: italic;
+      font-weight: 700;
+      color: var(--vert);
+    }
+    .cour-line .chaud {
+      color: var(--chaud);
+    }
+    .cour-line .num {
+      font-family: "Oswald", sans-serif;
+      font-weight: 700;
+      font-size: 0.6em;
+      color: #fff;
+      background: var(--violet);
+      border-radius: 50%;
+      display: inline-block;
+      width: 1.5em;
+      height: 1.5em;
+      line-height: 1.5em;
+      text-align: center;
+      vertical-align: 0.25em;
+      margin-right: 0.2em;
+    }
+    .cour-sub {
+      position: absolute;
+      left: 0;
+      right: 0;
+      font-family: "DM Sans", sans-serif;
+      font-weight: 700;
+      font-size: 46px;
+      line-height: 1.2;
+      color: var(--encre);
+    }
+    #cour-hook-q {
+      top: 96px;
+    }
+    #cour-svg {
+      position: absolute;
+      left: 0;
+      top: 720px;
+      width: 1080px;
+      height: 1200px;
+    }
+    #cour-svg text {
+      font-family: "DM Sans", sans-serif;
+      font-weight: 700;
+    }
+  </style>
+
+  <div id="root" data-composition-id="cour" data-width="1080" data-height="1920">
+    <img id="cour-logo" src="assets/logo.png" alt="Imagine Épinay" />
+
+    <div id="cour-text" data-layout-allow-overlap>
+      <!-- 0 — hook, on screen from frame 0 -->
+      <div id="cour-hook" class="cour-line">
+        <span id="cour-hook-ey" class="cour-banner">C'est quoi une Cours Oasis&nbsp;?</span>
+        <div id="cour-hook-q" class="cour-line">Pourquoi nos cours de récré <span class="chaud">chauffent</span>-elles autant&nbsp;?</div>
+      </div>
+
+      <!-- 1 — le bitume -->
+      <div id="cour-l1" class="cour-line">Le bitume absorbe la chaleur du&nbsp;soleil.</div>
+      <div id="cour-l1b" class="cour-sub" style="top: 200px">Au soleil, il peut dépasser <span style="color: var(--chaud)">50&nbsp;°C</span>.</div>
+
+      <!-- 2 — la pluie -->
+      <div id="cour-l2" class="cour-line">Quand il pleut, l'eau <span class="chaud">ruisselle</span> sans pénétrer le&nbsp;sol.</div>
+
+      <!-- 3 — bascule -->
+      <div id="cour-l3" class="cour-line">La Cours Oasis change <em>tout.</em></div>
+      <div id="cour-l3b" class="cour-sub" style="top: 200px; font-weight: 400">Une démarche née à Paris en&nbsp;2018.</div>
+
+      <!-- 4, 5, 6 — les étapes -->
+      <div id="cour-l4" class="cour-line"><span class="num">1</span>On retire le bitume&nbsp;: l'eau <em>rejoint la terre.</em></div>
+      <div id="cour-l5" class="cour-line"><span class="num">2</span>On plante&nbsp;: les arbres font <em>de l'ombre.</em></div>
+      <div id="cour-l6" class="cour-line"><span class="num">3</span>La cour devient <em>plus fraîche</em> et plus&nbsp;calme.</div>
+    </div>
+
+    <svg id="cour-svg" viewBox="0 0 1080 1200" data-layout-allow-overflow>
+      <defs>
+        <linearGradient id="cour-soil" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#7a5a43" />
+          <stop offset="1" stop-color="#4f3a2c" />
+        </linearGradient>
+      </defs>
+
+      <!-- soleil -->
+      <g id="cour-sun">
+        <g id="cour-rays" stroke="#f2b233" stroke-width="10" stroke-linecap="round">
+          <line x1="560" y1="0" x2="560" y2="18" />
+          <line x1="560" y1="162" x2="560" y2="180" />
+          <line x1="470" y1="90" x2="488" y2="90" />
+          <line x1="632" y1="90" x2="650" y2="90" />
+          <line x1="496" y1="26" x2="509" y2="39" />
+          <line x1="611" y1="141" x2="624" y2="154" />
+          <line x1="624" y1="26" x2="611" y2="39" />
+          <line x1="509" y1="141" x2="496" y2="154" />
+        </g>
+        <circle cx="560" cy="90" r="52" fill="#f2b233" />
+      </g>
+
+      <!-- école -->
+      <g id="cour-school">
+        <rect x="70" y="210" width="350" height="210" fill="#ede6f7" stroke="#5b2d8e" stroke-width="5" />
+        <polygon points="50,214 245,140 440,214" fill="#5b2d8e" />
+        <rect x="100" y="250" width="70" height="60" fill="#fff" stroke="#5b2d8e" stroke-width="4" />
+        <rect x="210" y="250" width="70" height="60" fill="#fff" stroke="#5b2d8e" stroke-width="4" />
+        <rect x="320" y="250" width="70" height="60" fill="#fff" stroke="#5b2d8e" stroke-width="4" />
+        <rect x="215" y="335" width="60" height="85" fill="#7b4ab8" />
+      </g>
+
+      <!-- sol : terre, herbe (cachée sous le bitume), bitume -->
+      <rect x="0" y="420" width="1080" height="780" fill="url(#cour-soil)" />
+      <g fill="#3f2e22" opacity="0.55">
+        <circle cx="120" cy="560" r="14" /><circle cx="330" cy="690" r="10" /><circle cx="520" cy="610" r="16" />
+        <circle cx="760" cy="720" r="12" /><circle cx="940" cy="590" r="15" /><circle cx="210" cy="860" r="18" />
+        <circle cx="640" cy="900" r="13" /><circle cx="880" cy="980" r="17" /><circle cx="420" cy="1030" r="12" />
+      </g>
+      <g id="cour-grass">
+        <rect x="0" y="420" width="1080" height="34" fill="#5cb860" />
+        <g id="cour-tufts" fill="#3a8c3f">
+          <path d="M470 420 l10 -26 l8 26 z M500 420 l7 -18 l7 18 z M690 420 l9 -24 l9 24 z M720 420 l6 -16 l6 16 z M880 420 l9 -26 l9 26 z M960 420 l7 -18 l7 18 z M1030 420 l9 -24 l9 24 z" />
+        </g>
+      </g>
+      <g id="cour-asphalt" fill="#4a4458">
+        <rect class="cour-seg" x="440" y="420" width="110" height="36" />
+        <rect class="cour-seg" x="550" y="420" width="110" height="36" />
+        <rect class="cour-seg" x="660" y="420" width="110" height="36" />
+        <rect class="cour-seg" x="770" y="420" width="110" height="36" />
+        <rect class="cour-seg" x="880" y="420" width="110" height="36" />
+        <rect class="cour-seg" x="990" y="420" width="90" height="36" />
+      </g>
+      <rect x="0" y="420" width="440" height="36" fill="#9a93a6" />
+      <text id="cour-lbl-bitume" x="760" y="446" font-size="30" fill="#fff" text-anchor="middle" letter-spacing="3">BITUME</text>
+
+      <!-- vagues de chaleur -->
+      <g id="cour-heat" fill="none" stroke="#d9531e" stroke-width="7" stroke-linecap="round">
+        <path class="cour-wave" d="M560 400 q14 -20 0 -40 q-14 -20 0 -40 q14 -20 0 -40" />
+        <path class="cour-wave" d="M720 400 q14 -20 0 -40 q-14 -20 0 -40 q14 -20 0 -40" />
+        <path class="cour-wave" d="M880 400 q14 -20 0 -40 q-14 -20 0 -40 q14 -20 0 -40" />
+      </g>
+
+      <!-- thermomètre -->
+      <g id="cour-thermo">
+        <rect x="990" y="110" width="40" height="240" rx="20" fill="#fff" stroke="#1c1228" stroke-width="5" />
+        <rect id="cour-thermo-fill" x="1000" y="130" width="20" height="230" rx="10" fill="#d9531e" />
+        <circle id="cour-thermo-bulb" cx="1010" cy="360" r="30" fill="#d9531e" stroke="#1c1228" stroke-width="5" />
+        <text id="cour-thermo-hot" x="972" y="160" font-size="48" fill="#d9531e" text-anchor="end">+50 °C</text>
+        <text id="cour-thermo-cool" x="1040" y="84" font-size="40" fill="#3a8c3f" text-anchor="end">plus frais</text>
+      </g>
+
+      <!-- pluie qui ruisselle -->
+      <g id="cour-rainA" stroke="#2f7fc1" stroke-width="6" stroke-linecap="round">
+        <line x1="480" y1="160" x2="472" y2="190" /><line x1="560" y1="130" x2="552" y2="160" />
+        <line x1="640" y1="170" x2="632" y2="200" /><line x1="720" y1="140" x2="712" y2="170" />
+        <line x1="800" y1="165" x2="792" y2="195" /><line x1="880" y1="135" x2="872" y2="165" />
+      </g>
+      <path id="cour-runoff" d="M470 408 L1060 408" stroke="#2f7fc1" stroke-width="10" stroke-linecap="round" fill="none" />
+      <path id="cour-runoff-head" d="M1040 394 L1066 408 L1040 422" stroke="#2f7fc1" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+      <text id="cour-lbl-runoff" x="760" y="385" font-size="34" fill="#2f7fc1" text-anchor="middle">l'eau ruisselle →</text>
+
+      <!-- pluie qui s'infiltre -->
+      <g id="cour-rainB" stroke="#2f7fc1" stroke-width="6" stroke-linecap="round">
+        <line x1="480" y1="160" x2="472" y2="190" /><line x1="560" y1="130" x2="552" y2="160" />
+        <line x1="640" y1="170" x2="632" y2="200" /><line x1="720" y1="140" x2="712" y2="170" />
+        <line x1="800" y1="165" x2="792" y2="195" /><line x1="880" y1="135" x2="872" y2="165" />
+      </g>
+      <g id="cour-infil" fill="none" stroke="#8fc4ef" stroke-width="7" stroke-linecap="round">
+        <path class="cour-flow" d="M520 456 q-12 30 0 60 q12 30 0 60" />
+        <path class="cour-flow" d="M680 456 q12 30 0 60 q-12 30 0 60" />
+        <path class="cour-flow" d="M840 456 q-12 30 0 60 q12 30 0 60" />
+      </g>
+      <text id="cour-lbl-infil" x="760" y="512" font-size="34" fill="#fff" text-anchor="middle">l'eau s'infiltre ↓</text>
+
+      <!-- racines, arbres, ombre -->
+      <g id="cour-roots" fill="none" stroke="#c9a27e" stroke-width="5" stroke-linecap="round">
+        <path class="cour-root" d="M600 456 q-10 40 -40 70 M600 456 q6 50 30 90 M600 456 q-2 30 -2 60" />
+        <path class="cour-root" d="M800 456 q-12 40 -44 66 M800 456 q8 46 32 84 M800 456 q2 34 0 64" />
+      </g>
+      <ellipse id="cour-shade1" cx="600" cy="428" rx="120" ry="12" fill="#1c1228" opacity="0" />
+      <ellipse id="cour-shade2" cx="800" cy="428" rx="120" ry="12" fill="#1c1228" opacity="0" />
+      <g id="cour-tree1">
+        <rect class="cour-trunk" x="591" y="290" width="18" height="132" fill="#6b4e3a" />
+        <g class="cour-crown">
+          <circle cx="600" cy="250" r="78" fill="#3a8c3f" />
+          <circle cx="552" cy="290" r="50" fill="#5cb860" />
+          <circle cx="650" cy="286" r="52" fill="#5cb860" />
+        </g>
+      </g>
+      <g id="cour-tree2">
+        <rect class="cour-trunk" x="791" y="300" width="18" height="122" fill="#6b4e3a" />
+        <g class="cour-crown">
+          <circle cx="800" cy="262" r="70" fill="#3a8c3f" />
+          <circle cx="756" cy="298" r="46" fill="#5cb860" />
+          <circle cx="846" cy="296" r="48" fill="#5cb860" />
+        </g>
+      </g>
+
+      <!-- bancs et fleurs -->
+      <g id="cour-bench1" fill="#a0703f">
+        <rect x="660" y="394" width="70" height="10" rx="3" /><rect x="666" y="404" width="8" height="18" /><rect x="716" y="404" width="8" height="18" />
+      </g>
+      <g id="cour-bench2" fill="#a0703f">
+        <rect x="880" y="394" width="70" height="10" rx="3" /><rect x="886" y="404" width="8" height="18" /><rect x="936" y="404" width="8" height="18" />
+      </g>
+      <g id="cour-flowers">
+        <circle cx="480" cy="410" r="9" fill="#7b4ab8" /><circle cx="520" cy="414" r="7" fill="#f2b233" />
+        <circle cx="960" cy="410" r="9" fill="#7b4ab8" /><circle cx="1050" cy="412" r="8" fill="#f2b233" />
+        <circle cx="700" cy="414" r="7" fill="#7b4ab8" />
+      </g>
+    </svg>
+  </div>
+
+  <script>
+    (function () {
+      const $ = (id) => document.getElementById(id);
+      const $$ = (sel, root) => Array.from((root || $("cour-svg")).querySelectorAll(sel));
+
+      // Split each text line into word spans for word-by-word entrances.
+      function split(el) {
+        Array.from(el.childNodes).forEach((n) => {
+          if (n.nodeType === 3) {
+            const frag = document.createDocumentFragment();
+            n.textContent.split(/( +)/).forEach((p) => {
+              if (!p) return;
+              if (/^ +$/.test(p)) return frag.append(" ");
+              const s = document.createElement("span");
+              s.className = "w";
+              s.style.display = "inline-block";
+              s.textContent = p;
+              frag.append(s);
+            });
+            n.replaceWith(frag);
+          } else if (n.nodeType === 1 && !n.classList.contains("num") && !n.classList.contains("cour-banner")) {
+            split(n);
+          }
+        });
+      }
+      const lineIds = ["cour-hook-q", "cour-l1", "cour-l1b", "cour-l2", "cour-l3", "cour-l3b", "cour-l4", "cour-l5", "cour-l6"];
+      lineIds.forEach((id) => split($(id)));
+      const words = (id) => Array.from($(id).querySelectorAll(".w, .num"));
+
+      const tl = gsap.timeline({ paused: true });
+
+      function wordsIn(id, t) {
+        tl.fromTo(words(id), { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.14, stagger: 0.07, ease: "power2.out" }, t);
+      }
+      function wordsOut(id, t) {
+        tl.to(words(id), { opacity: 0, filter: "blur(8px)", duration: 0.18, stagger: 0.015, ease: "power2.in" }, t);
+      }
+      // Hidden before their entrance.
+      lineIds.slice(2).forEach((id) => gsap.set(words(id), { opacity: 0 }));
+      gsap.set(words("cour-l1"), { opacity: 0 });
+
+      // ---------- Texte ----------
+      // 0 — hook (visible at frame 0)
+      tl.to("#cour-hook-ey", { opacity: 0, filter: "blur(8px)", duration: 0.2, ease: "power2.in" }, 5.0);
+      wordsOut("cour-hook-q", 5.0);
+      // 1 — bitume
+      wordsIn("cour-l1", 5.5);
+      wordsIn("cour-l1b", 7.0);
+      wordsOut("cour-l1", 10.2);
+      wordsOut("cour-l1b", 10.2);
+      // 2 — pluie
+      wordsIn("cour-l2", 10.6);
+      wordsOut("cour-l2", 14.3);
+      // 3 — bascule
+      wordsIn("cour-l3", 14.6);
+      wordsIn("cour-l3b", 15.0);
+      wordsOut("cour-l3", 17.4);
+      wordsOut("cour-l3b", 17.4);
+      // 4, 5, 6 — étapes
+      wordsIn("cour-l4", 17.7);
+      wordsOut("cour-l4", 20.9);
+      wordsIn("cour-l5", 21.2);
+      wordsOut("cour-l5", 24.4);
+      wordsIn("cour-l6", 24.7);
+
+      // ---------- Illustration ----------
+      // Soleil : rotation lente et constante
+      tl.fromTo("#cour-rays", { rotation: 0, svgOrigin: "560 90" }, { rotation: 60, svgOrigin: "560 90", duration: 27.5, ease: "none" }, 0);
+
+      // Vagues de chaleur : montent en boucle finie jusqu'à la fraîcheur
+      $$(".cour-wave").forEach((w, i) => {
+        tl.fromTo(w, { y: 0, opacity: 0.9 }, { y: -36, opacity: 0.15, duration: 1.2, ease: "sine.out", repeat: 19, delay: 0 }, i * 0.4);
+      });
+      tl.to("#cour-heat", { opacity: 0, duration: 0.6, ease: "power2.inOut" }, 24.7);
+
+      // Thermomètre : chaud, puis brûlant, puis frais
+      gsap.set("#cour-thermo-fill", { scaleY: 0.45, transformOrigin: "50% 100%" });
+      gsap.set(["#cour-thermo-hot", "#cour-thermo-cool"], { opacity: 0 });
+      tl.to("#cour-thermo-fill", { scaleY: 1, duration: 1.6, ease: "power2.inOut" }, 7.0);
+      tl.fromTo("#cour-thermo-hot", { opacity: 0, x: 20 }, { opacity: 1, x: 0, duration: 0.35, ease: "expo.out" }, 8.0);
+      tl.to("#cour-thermo-hot", { opacity: 0, duration: 0.2 }, 24.7);
+      tl.to("#cour-thermo-fill", { scaleY: 0.3, fill: "#3a8c3f", duration: 1.2, ease: "power2.inOut" }, 24.9);
+      tl.to("#cour-thermo-bulb", { fill: "#3a8c3f", duration: 1.2, ease: "power2.inOut" }, 24.9);
+      tl.fromTo("#cour-thermo-cool", { opacity: 0, x: 20 }, { opacity: 1, x: 0, duration: 0.35, ease: "expo.out" }, 25.6);
+
+      // Pluie qui ruisselle sur le bitume
+      gsap.set(["#cour-rainA", "#cour-rainB", "#cour-lbl-runoff", "#cour-lbl-infil", "#cour-runoff-head"], { opacity: 0 });
+      gsap.set("#cour-runoff", { strokeDasharray: 600, strokeDashoffset: 600 });
+      tl.set("#cour-rainA", { opacity: 1 }, 10.8);
+      $$("#cour-rainA line").forEach((d, i) => {
+        tl.fromTo(d, { y: 0 }, { y: 220, duration: 0.55, ease: "power1.in", repeat: 5 }, 10.8 + i * 0.09);
+      });
+      tl.set("#cour-rainA", { opacity: 0 }, 14.3);
+      tl.to("#cour-runoff", { strokeDashoffset: 0, duration: 1.0, ease: "power2.inOut" }, 11.4);
+      tl.to("#cour-runoff-head", { opacity: 1, duration: 0.15 }, 12.3);
+      tl.fromTo("#cour-lbl-runoff", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2 }, 12.0);
+      tl.to(["#cour-runoff", "#cour-runoff-head", "#cour-lbl-runoff"], { opacity: 0, duration: 0.3 }, 14.3);
+
+      // Étape 1 : le bitume disparaît, l'herbe pousse, l'eau s'infiltre
+      tl.to("#cour-lbl-bitume", { opacity: 0, duration: 0.2 }, 17.6);
+      tl.to($$(".cour-seg"), { scaleY: 0, transformOrigin: "50% 100%", opacity: 0, duration: 0.35, stagger: 0.12, ease: "power3.in" }, 17.7);
+      tl.fromTo("#cour-tufts", { scaleY: 0, transformOrigin: "50% 100%" }, { scaleY: 1, duration: 0.6, ease: "back.out(1.6)" }, 18.4);
+      tl.set("#cour-rainB", { opacity: 1 }, 18.6);
+      $$("#cour-rainB line").forEach((d, i) => {
+        tl.fromTo(d, { y: 0 }, { y: 250, duration: 0.6, ease: "power1.in", repeat: 3 }, 18.6 + i * 0.09);
+      });
+      tl.set("#cour-rainB", { opacity: 0 }, 21.1);
+      $$(".cour-flow").forEach((f) => gsap.set(f, { strokeDasharray: 140, strokeDashoffset: 140 }));
+      tl.to($$(".cour-flow"), { strokeDashoffset: 0, duration: 0.9, stagger: 0.15, ease: "power2.out" }, 19.0);
+      tl.fromTo("#cour-lbl-infil", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2 }, 19.4);
+      tl.to(["#cour-lbl-infil"], { opacity: 0, duration: 0.25 }, 21.0);
+
+      // Étape 2 : les arbres poussent, l'ombre apparaît, les racines descendent
+      ["#cour-tree1", "#cour-tree2"].forEach((t, i) => {
+        const trunk = document.querySelector(t + " .cour-trunk");
+        const crown = document.querySelector(t + " .cour-crown");
+        tl.fromTo(trunk, { scaleY: 0, transformOrigin: "50% 100%" }, { scaleY: 1, duration: 0.6, ease: "power3.out" }, 21.4 + i * 0.3);
+        tl.fromTo(crown, { scale: 0, transformOrigin: "50% 80%" }, { scale: 1, duration: 0.8, ease: "back.out(1.5)" }, 21.8 + i * 0.3);
+      });
+      tl.to(["#cour-shade1", "#cour-shade2"], { opacity: 0.22, duration: 0.6, stagger: 0.3 }, 22.3);
+      $$(".cour-root").forEach((r) => gsap.set(r, { strokeDasharray: 260, strokeDashoffset: 260 }));
+      tl.to($$(".cour-root"), { strokeDashoffset: 0, duration: 1.0, stagger: 0.3, ease: "power2.out" }, 21.6);
+
+      // Étape 3 : bancs et fleurs
+      tl.fromTo(["#cour-bench1", "#cour-bench2"], { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.15, ease: "back.out(1.4)" }, 25.2);
+      tl.fromTo($$("#cour-flowers circle"), { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.3, stagger: 0.06, ease: "back.out(2)" }, 25.5);
+
+      window.__timelines["cour"] = tl;
+    })();
+  </script>
+</template>
