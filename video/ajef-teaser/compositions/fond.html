@@ -1,0 +1,55 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #1a2c6e;
+    }
+    .fd-halo {
+      position: absolute;
+      width: 1500px;
+      height: 1500px;
+      border-radius: 50%;
+    }
+    #fd-bleu {
+      left: -700px;
+      top: -650px;
+      background: radial-gradient(circle, #3d6bff 0%, rgba(61, 107, 255, 0) 62%);
+    }
+    #fd-rouge {
+      left: 330px;
+      top: 80px;
+      background: radial-gradient(circle, #ef4135 0%, rgba(239, 65, 53, 0) 60%);
+    }
+    #fd-cocarde {
+      left: -480px;
+      top: 900px;
+      background: radial-gradient(circle, #0055a4 0%, rgba(0, 85, 164, 0) 60%);
+    }
+    #fd-logo {
+      position: absolute;
+      left: 72px;
+      top: 190px;
+      width: 206px;
+    }
+  </style>
+  <div id="root" data-composition-id="fond" data-width="1080" data-height="1920" data-layout-allow-overflow>
+    <div id="fd-bleu" class="fd-halo" data-layout-ignore></div>
+    <div id="fd-rouge" class="fd-halo" data-layout-ignore></div>
+    <div id="fd-cocarde" class="fd-halo" data-layout-ignore></div>
+    <img id="fd-logo" src="assets/logo-ajef-blanc.png" alt="AJEF – Association des Jeunes Élus de France" />
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      // Halos drift slowly across the whole film (one move each, no loops).
+      tl.fromTo("#fd-bleu", { x: 0, y: 0 }, { x: 260, y: 180, duration: 30, ease: "sine.inOut" }, 0);
+      tl.fromTo("#fd-rouge", { x: 0, y: 0 }, { x: -220, y: 420, duration: 30, ease: "sine.inOut" }, 0);
+      tl.fromTo("#fd-cocarde", { x: 0, y: 0 }, { x: 320, y: -260, duration: 30, ease: "sine.inOut" }, 0);
+      // The small logo gives way to the large one on the end card.
+      tl.to("#fd-logo", { opacity: 0, y: -20, duration: 0.3, ease: "power2.in" }, 25.3);
+      window.__timelines["fond"] = tl;
+    })();
+  </script>
+</template>

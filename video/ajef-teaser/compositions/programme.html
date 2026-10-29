@@ -1,0 +1,137 @@
+<template>
+  <style>
+    @font-face { font-family: "Unbounded"; font-weight: 600; src: url("assets/fonts/unbounded-latin-600-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Unbounded"; font-weight: 800; src: url("assets/fonts/unbounded-latin-800-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Unbounded"; font-weight: 900; src: url("assets/fonts/unbounded-latin-900-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Instrument Serif"; font-style: italic; font-weight: 400; src: url("assets/fonts/instrument-serif-latin-400-italic.woff2") format("woff2"); }
+    @font-face { font-family: "Instrument Sans"; font-weight: 500; src: url("assets/fonts/instrument-sans-latin-500-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Instrument Sans"; font-weight: 600; src: url("assets/fonts/instrument-sans-latin-600-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Instrument Sans"; font-weight: 700; src: url("assets/fonts/instrument-sans-latin-700-normal.woff2") format("woff2"); }
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      color: #ffffff;
+    }
+    #pg-head {
+      position: absolute;
+      left: 72px;
+      right: 72px;
+      top: 400px;
+    }
+    #pg-eyebrow {
+      font-family: "Instrument Sans", sans-serif;
+      font-weight: 700;
+      font-size: 30px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: #ffffff;
+      opacity: 0.85;
+    }
+    #pg-title {
+      margin-top: 14px;
+      font-family: "Instrument Serif", serif;
+      font-style: italic;
+      font-size: 120px;
+      line-height: 0.95;
+    }
+    #pg-list {
+      position: absolute;
+      left: 56px;
+      right: 56px;
+      top: 640px;
+      background: rgba(6, 10, 34, 0.55);
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
+      border-radius: 36px;
+      padding: 28px 40px 28px 40px;
+    }
+    #pg-rail {
+      position: absolute;
+      left: 58px;
+      top: 64px;
+      bottom: 64px;
+      width: 4px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.35);
+    }
+    .pg-row {
+      position: relative;
+      display: grid;
+      grid-template-columns: 190px minmax(0, 1fr);
+      gap: 18px;
+      align-items: baseline;
+      padding: 20px 0 20px 52px;
+    }
+    .pg-dot {
+      position: absolute;
+      left: 8px;
+      top: 34px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 6px solid #1a2c6e;
+    }
+    .pg-time {
+      font-family: "Unbounded", sans-serif;
+      font-weight: 800;
+      font-size: 54px;
+      line-height: 1;
+      letter-spacing: -1.5px;
+      white-space: nowrap;
+    }
+    .pg-txt {
+      font-family: "Instrument Sans", sans-serif;
+      font-weight: 600;
+      font-size: 38px;
+      line-height: 1.2;
+    }
+    .pg-txt small {
+      display: block;
+      margin-top: 6px;
+      font-weight: 500;
+      font-size: 30px;
+      line-height: 1.25;
+      opacity: 0.85;
+    }
+  </style>
+  <div id="root" data-composition-id="programme" data-width="1080" data-height="1920">
+    <div id="pg-head">
+      <div id="pg-eyebrow">Programme prévisionnel</div>
+      <div id="pg-title">Au programme</div>
+    </div>
+
+    <div id="pg-list">
+      <div id="pg-rail"></div>
+      <div id="pg-r1" class="pg-row"><div class="pg-dot"></div><div class="pg-time">14 h</div><div class="pg-txt">Discours d'accueil et présentation de l'AJEF</div></div>
+      <div id="pg-r2" class="pg-row"><div class="pg-dot"></div><div class="pg-time">15 h</div><div class="pg-txt">Table ronde « Les nouveaux visages de la politique locale »</div></div>
+      <div id="pg-r3" class="pg-row"><div class="pg-dot"></div><div class="pg-time">16 h</div><div class="pg-txt">Conférence flash de l'Association des Maires de France</div></div>
+      <div id="pg-r4" class="pg-row"><div class="pg-dot"></div><div class="pg-time">17 h</div><div class="pg-txt">Échanges avec l'IFOP<small>Les Français et la politique, à six mois de la présidentielle</small></div></div>
+      <div id="pg-r5" class="pg-row"><div class="pg-dot"></div><div class="pg-time">18 h</div><div class="pg-txt">Lancement des commissions thématiques</div></div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+
+      tl.fromTo("#pg-eyebrow", { opacity: 0, x: -40 }, { opacity: 0.85, x: 0, duration: 0.4, ease: "expo.out" }, 0.1);
+      tl.fromTo("#pg-title", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, 0.25);
+      tl.fromTo("#pg-list", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" }, 0.45);
+
+      // The rail draws down as the afternoon goes by.
+      tl.fromTo("#pg-rail", { scaleY: 0, transformOrigin: "50% 0%" }, { scaleY: 1, duration: 8.6, ease: "none" }, 0.8);
+
+      const rows = ["#pg-r1", "#pg-r2", "#pg-r3", "#pg-r4", "#pg-r5"];
+      rows.forEach((r) => gsap.set([r + " .pg-time", r + " .pg-txt", r + " .pg-dot"], { opacity: 0 }));
+      rows.forEach((r, i) => {
+        const t = 0.9 + i * 1.95;
+        tl.fromTo(r + " .pg-dot", { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.5)" }, t);
+        tl.fromTo(r + " .pg-time", { opacity: 0, x: -60, filter: "blur(8px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.4, ease: "expo.out" }, t + 0.05);
+        tl.fromTo(r + " .pg-txt", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, t + 0.2);
+      });
+
+      tl.to(["#pg-head", "#pg-list"], { opacity: 0, y: -80, filter: "blur(10px)", duration: 0.3, stagger: 0.05, ease: "power3.in" }, 11.3);
+      window.__timelines["programme"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,137 @@
+<template>
+  <style>
+    @font-face { font-family: "Unbounded"; font-weight: 600; src: url("assets/fonts/unbounded-latin-600-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Unbounded"; font-weight: 800; src: url("assets/fonts/unbounded-latin-800-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Unbounded"; font-weight: 900; src: url("assets/fonts/unbounded-latin-900-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Instrument Serif"; font-style: italic; font-weight: 400; src: url("assets/fonts/instrument-serif-latin-400-italic.woff2") format("woff2"); }
+    @font-face { font-family: "Instrument Sans"; font-weight: 500; src: url("assets/fonts/instrument-sans-latin-500-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Instrument Sans"; font-weight: 600; src: url("assets/fonts/instrument-sans-latin-600-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Instrument Sans"; font-weight: 700; src: url("assets/fonts/instrument-sans-latin-700-normal.woff2") format("woff2"); }
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      color: #ffffff;
+    }
+    #fi-cta {
+      position: absolute;
+      left: 72px;
+      right: 72px;
+      top: 600px;
+      text-align: center;
+    }
+    #fi-open {
+      font-family: "Instrument Sans", sans-serif;
+      font-weight: 700;
+      font-size: 30px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: #ffffff;
+    }
+    #fi-inscris {
+      margin-top: 18px;
+      font-family: "Instrument Serif", serif;
+      font-style: italic;
+      font-size: 160px;
+      line-height: 0.95;
+    }
+    #fi-pill {
+      position: absolute;
+      left: 72px;
+      right: 72px;
+      top: 1010px;
+      text-align: center;
+    }
+    #fi-pill span {
+      display: inline-block;
+      background: #ffffff;
+      color: #0b1238;
+      border-radius: 999px;
+      padding: 26px 48px;
+      font-family: "Unbounded", sans-serif;
+      font-weight: 800;
+      font-size: 46px;
+      letter-spacing: -1px;
+      white-space: nowrap;
+    }
+    #fi-logo {
+      position: absolute;
+      left: 50%;
+      top: 330px;
+      width: 480px;
+      margin-left: -240px;
+    }
+    #fi-date {
+      position: absolute;
+      left: 72px;
+      right: 72px;
+      top: 680px;
+      text-align: center;
+      font-family: "Unbounded", sans-serif;
+      font-weight: 600;
+      font-size: 40px;
+      letter-spacing: -0.5px;
+    }
+    #fi-date i {
+      font-style: normal;
+      opacity: 0.6;
+    }
+    #fi-region {
+      position: absolute;
+      left: 56px;
+      right: 56px;
+      top: 990px;
+      background: #ffffff;
+      color: #0b1238;
+      border-radius: 36px;
+      padding: 40px 48px 44px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+    #fi-soutien {
+      font-family: "Instrument Serif", serif;
+      font-style: italic;
+      font-size: 54px;
+      line-height: 1;
+    }
+    #fi-region img {
+      width: 600px;
+      display: block;
+    }
+  </style>
+  <div id="root" data-composition-id="fin" data-width="1080" data-height="1920">
+    <div id="fi-cta">
+      <div id="fi-open">Inscriptions ouvertes</div>
+      <div id="fi-inscris">Inscris-toi</div>
+    </div>
+    <div id="fi-pill"><span>jeuneselusdefrance.fr</span></div>
+
+    <img id="fi-logo" src="assets/logo-ajef-blanc.png" alt="AJEF – Association des Jeunes Élus de France" />
+    <div id="fi-date">Samedi 21 novembre <i>·</i> Saint-Ouen</div>
+    <div id="fi-region" data-layout-allow-overlap>
+      <div id="fi-soutien">Avec le soutien de la</div>
+      <img src="assets/logo-region-idf.png" alt="Région Île-de-France" />
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      gsap.set(["#fi-logo", "#fi-date", "#fi-region"], { opacity: 0 });
+
+      // Call to action.
+      tl.fromTo("#fi-open", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: "expo.out" }, 0.1);
+      tl.fromTo("#fi-inscris", { opacity: 0, scale: 1.25, filter: "blur(12px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.45, ease: "expo.out" }, 0.25);
+      tl.fromTo("#fi-pill span", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.8)" }, 0.75);
+
+      // Re-layout into the end card: the address rises, the signatures arrive.
+      tl.to("#fi-cta", { opacity: 0, y: -60, filter: "blur(10px)", duration: 0.3, ease: "power3.in" }, 3.2);
+      tl.to("#fi-pill", { y: -210, scale: 0.9, duration: 0.6, ease: "power3.inOut" }, 3.3);
+      tl.fromTo("#fi-logo", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" }, 3.5);
+      tl.fromTo("#fi-date", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, 3.8);
+      tl.fromTo("#fi-region", { opacity: 0, y: 260 }, { opacity: 1, y: 0, duration: 0.65, ease: "expo.out" }, 4.0);
+      window.__timelines["fin"] = tl;
+    })();
+  </script>
+</template>
