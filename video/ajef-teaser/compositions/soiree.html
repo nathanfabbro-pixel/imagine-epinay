@@ -157,16 +157,16 @@
 
       // The three pills drop in, each at its own tilt.
       [["#so-p1", -3], ["#so-p2", 2], ["#so-p3", -2]].forEach(([p, r], i) => {
-        tl.fromTo(p, { opacity: 0, scale: 0.3, rotation: r * 4 }, { opacity: 1, scale: 1, rotation: r, duration: 0.45, ease: "back.out(2)" }, 1.6 + i * 0.22);
+        tl.fromTo(p, { opacity: 0, scale: 0.3, rotation: r * 4 }, { opacity: 1, scale: 1, rotation: r, duration: 0.45, ease: "back.out(2)" }, 1.45 + i * 0.18);
       });
-      tl.fromTo("#so-surprises", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2 }, 2.35);
+      tl.fromTo("#so-surprises", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2 }, 2.0);
 
-      tl.fromTo("#so-card", { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: 0.55, ease: "expo.out" }, 2.7);
+      tl.fromTo("#so-card", { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: 0.55, ease: "expo.out" }, 2.0);
 
       // Iris back out to the day palette.
-      tl.to(["#so-title", "#so-pills", "#so-card", "#so-logo"], { opacity: 0, filter: "blur(10px)", duration: 0.25, ease: "power3.in" }, 5.15);
-      tl.to("#so-ground", { clipPath: "circle(0% at 50% 45%)", duration: 0.45, ease: "power2.inOut" }, 5.15);
-      tl.to("#so-ground", { opacity: 0, duration: 0.12 }, 5.38);
+      tl.to(["#so-title", "#so-pills", "#so-card", "#so-logo"], { opacity: 0, filter: "blur(10px)", duration: 0.25, ease: "power3.in" }, 4.55);
+      tl.to("#so-ground", { clipPath: "circle(0% at 50% 45%)", duration: 0.45, ease: "power2.inOut" }, 4.55);
+      tl.to("#so-ground", { opacity: 0, duration: 0.12 }, 4.8);
       window.__timelines["soiree"] = tl;
     })();
   </script>

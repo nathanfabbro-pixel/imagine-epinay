@@ -13,11 +13,15 @@
       overflow: hidden;
       color: #ffffff;
     }
-    #fi-cta {
+    #fi-head {
       position: absolute;
-      left: 72px;
-      right: 72px;
-      top: 470px;
+      left: 0;
+      right: 0;
+      top: 330px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
     #fi-inscriptions {
       font-family: "Unbounded", sans-serif;
@@ -30,10 +34,9 @@
     #fi-ouvertes {
       font-family: "Instrument Serif", serif;
       font-style: italic;
-      font-size: 156px;
+      font-size: 160px;
       line-height: 0.95;
       letter-spacing: -2px;
-      padding-left: 56px;
       white-space: nowrap;
     }
     #fi-bang {
@@ -41,113 +44,133 @@
       color: #ff7a73;
     }
     #fi-lead {
-      margin-top: 40px;
+      margin-top: 18px;
       font-family: "Instrument Sans", sans-serif;
       font-weight: 600;
-      font-size: 40px;
+      font-size: 38px;
       line-height: 1.25;
     }
-    #fi-pill {
+    #fi-card {
       position: absolute;
       left: 56px;
       right: 56px;
-      top: 960px;
-      text-align: center;
+      top: 690px;
+      background: rgba(6, 10, 34, 0.6);
+      border: 1.5px solid rgba(255, 255, 255, 0.28);
+      border-radius: 36px;
+      padding: 36px 36px 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
     }
-    #fi-pill span {
-      display: inline-block;
-      background: #ffffff;
-      color: #0b1238;
-      border-radius: 999px;
-      padding: 26px 44px;
-      font-family: "Unbounded", sans-serif;
-      font-weight: 800;
-      font-size: 34px;
-      letter-spacing: -0.5px;
-      white-space: nowrap;
-    }
-    #fi-hotel {
-      position: absolute;
-      left: 72px;
-      right: 72px;
-      top: 1110px;
-      font-family: "Instrument Sans", sans-serif;
-      font-weight: 500;
-      font-size: 32px;
-      line-height: 1.35;
-      opacity: 0.9;
-    }
-    #fi-logo {
-      position: absolute;
-      left: 50%;
-      top: 250px;
-      width: 380px;
-      margin-left: -190px;
-    }
-    #fi-date {
-      position: absolute;
-      left: 72px;
-      right: 72px;
-      top: 520px;
-      text-align: center;
-      font-family: "Unbounded", sans-serif;
-      font-weight: 600;
-      font-size: 40px;
-      letter-spacing: -0.5px;
+    #fi-grid {
+      display: grid;
+      grid-template-columns: 270px minmax(0, 1fr);
+      gap: 32px;
+      align-items: center;
     }
     #fi-qr {
-      position: absolute;
-      left: 50%;
-      top: 600px;
-      width: 300px;
-      margin-left: -150px;
       background: #ffffff;
-      border-radius: 28px;
+      border-radius: 24px;
       padding: 16px;
     }
     #fi-qr img {
       display: block;
-      width: 268px;
-      height: 268px;
+      width: 238px;
+      height: 238px;
+    }
+    #fi-col {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    #fi-url {
+      font-family: "Unbounded", sans-serif;
+      font-weight: 800;
+      font-size: 32px;
+      line-height: 1.25;
+      letter-spacing: -0.5px;
+    }
+    .fi-row {
+      display: grid;
+      grid-template-columns: 150px minmax(0, 1fr);
+      gap: 12px;
+      align-items: baseline;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.22);
+    }
+    .fi-t {
+      font-family: "Unbounded", sans-serif;
+      font-weight: 800;
+      font-size: 28px;
+      white-space: nowrap;
+    }
+    .fi-d {
+      font-family: "Instrument Sans", sans-serif;
+      font-weight: 600;
+      font-size: 30px;
+      line-height: 1.2;
+    }
+    #fi-soir .fi-t {
+      color: #ff7a73;
+    }
+    #fi-hotel {
+      border-top: 1px solid rgba(255, 255, 255, 0.22);
+      padding-top: 22px;
+      font-family: "Instrument Sans", sans-serif;
+      font-weight: 500;
+      font-size: 30px;
+      line-height: 1.35;
+    }
+    #fi-hotel b {
+      font-weight: 700;
     }
     #fi-region {
       position: absolute;
       left: 56px;
       right: 56px;
-      top: 1075px;
+      top: 1210px;
       background: #ffffff;
       color: #0b1238;
-      border-radius: 36px;
-      padding: 30px 48px 34px;
+      border-radius: 32px;
+      padding: 24px 40px;
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      gap: 18px;
+      gap: 28px;
     }
     #fi-soutien {
       font-family: "Instrument Serif", serif;
       font-style: italic;
-      font-size: 48px;
+      font-size: 42px;
       line-height: 1;
+      white-space: nowrap;
     }
     #fi-region img {
-      width: 520px;
       display: block;
+      width: 380px;
     }
   </style>
   <div id="root" data-composition-id="fin" data-width="1080" data-height="1920">
-    <div id="fi-cta">
+    <div id="fi-head">
       <div id="fi-inscriptions">INSCRIPTIONS</div>
       <div id="fi-ouvertes">ouvertes<span id="fi-bang">&nbsp;!</span></div>
-      <div id="fi-lead">Inscrivez-vous dès maintenant à l'après-midi&nbsp;:</div>
+      <div id="fi-lead">Inscrivez-vous dès maintenant à l'après-midi</div>
     </div>
-    <div id="fi-pill" data-layout-allow-overlap><span>billetweb.fr/bienvenue-ajef-2026</span></div>
-    <div id="fi-hotel">Hôtel à tarif négocié&nbsp;: questionnaire de la billetterie avant le 10&nbsp;novembre.</div>
 
-    <img id="fi-logo" src="assets/logo-ajef-blanc.png" alt="AJEF – Association des Jeunes Élus de France" />
-    <div id="fi-date">Samedi 21 novembre · Saint-Ouen</div>
-    <div id="fi-qr"><img src="assets/qr-billetweb.png" alt="QR code d'inscription BilletWeb" /></div>
-    <div id="fi-region" data-layout-allow-overlap>
+    <div id="fi-card">
+      <div id="fi-grid">
+        <div id="fi-qr"><img src="assets/qr-billetweb.png" alt="QR code d'inscription BilletWeb" /></div>
+        <div id="fi-col">
+          <div id="fi-url">billetweb.fr/<br />bienvenue-ajef-2026</div>
+          <div id="fi-am" class="fi-row"><div class="fi-t">13 h 30</div><div class="fi-d">L'après-midi à la Région</div></div>
+          <div id="fi-soir" class="fi-row"><div class="fi-t">Le soir</div><div class="fi-d">Programme à venir</div></div>
+        </div>
+      </div>
+      <div id="fi-hotel"><b>Hôtel à tarif négocié&nbsp;:</b> questionnaire de la billetterie avant le 10&nbsp;novembre.</div>
+    </div>
+
+    <div id="fi-region">
       <div id="fi-soutien">Avec le soutien de la</div>
       <img src="assets/logo-region-idf.png" alt="Région Île-de-France" />
     </div>
@@ -155,23 +178,20 @@
   <script>
     (function () {
       const tl = gsap.timeline({ paused: true });
-      gsap.set(["#fi-logo", "#fi-date", "#fi-qr", "#fi-region"], { opacity: 0 });
 
-      // Registration is open.
-      tl.fromTo("#fi-inscriptions", { opacity: 0, scale: 1.3, transformOrigin: "0% 50%", filter: "blur(12px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.45, ease: "expo.out" }, 0.15);
-      tl.fromTo("#fi-ouvertes", { opacity: 0, x: 140, filter: "blur(10px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.45, ease: "expo.out" }, 0.4);
-      tl.fromTo("#fi-bang", { opacity: 0, scale: 0.2, rotation: -20 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.5, ease: "back.out(2.2)" }, 0.7);
-      tl.fromTo("#fi-lead", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2 }, 0.95);
-      tl.fromTo("#fi-pill span", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.8)" }, 1.15);
-      tl.fromTo("#fi-hotel", { opacity: 0, y: 20 }, { opacity: 0.9, y: 0, duration: 0.4, ease: "expo.out" }, 1.3);
+      tl.fromTo("#fi-inscriptions", { opacity: 0, scale: 1.4, filter: "blur(12px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.45, ease: "expo.out" }, 0.1);
+      tl.fromTo("#fi-ouvertes", { opacity: 0, y: -80, filter: "blur(10px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.45, ease: "back.out(1.5)" }, 0.35);
+      tl.fromTo("#fi-bang", { opacity: 0, scale: 0.2, rotation: -20 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.5, ease: "back.out(2.4)" }, 0.65);
+      tl.fromTo("#fi-lead", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2 }, 0.85);
 
-      // Re-layout into the end card: the address stays, the signatures arrive.
-      tl.to(["#fi-cta", "#fi-hotel"], { opacity: 0, y: -60, filter: "blur(10px)", duration: 0.3, ease: "power3.in" }, 4.3);
-      tl.to("#fi-pill", { y: -20, scale: 0.92, duration: 0.6, ease: "power3.inOut" }, 4.4);
-      tl.fromTo("#fi-logo", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" }, 4.55);
-      tl.fromTo("#fi-date", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, 4.75);
-      tl.fromTo("#fi-qr", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.6)" }, 4.85);
-      tl.fromTo("#fi-region", { opacity: 0, y: 260 }, { opacity: 1, y: 0, duration: 0.65, ease: "expo.out" }, 5.05);
+      tl.fromTo("#fi-card", { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" }, 1.0);
+      tl.fromTo("#fi-qr", { opacity: 0, scale: 0.6, rotation: -6 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.5, ease: "back.out(1.8)" }, 1.15);
+      tl.fromTo("#fi-url", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.4, ease: "expo.out" }, 1.3);
+      tl.fromTo(["#fi-am", "#fi-soir"], { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.4, stagger: 0.15, ease: "expo.out" }, 1.5);
+      tl.fromTo("#fi-hotel", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.4, ease: "expo.out" }, 1.85);
+
+      // The partner band closes the film and stays.
+      tl.fromTo("#fi-region", { opacity: 0, y: 200 }, { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" }, 2.4);
       window.__timelines["fin"] = tl;
     })();
   </script>
