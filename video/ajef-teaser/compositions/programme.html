@@ -106,7 +106,7 @@
       <div id="pg-r1" class="pg-row"><div class="pg-dot"></div><div class="pg-time">14 h</div><div class="pg-txt">Discours d'accueil et présentation de l'AJEF</div></div>
       <div id="pg-r2" class="pg-row"><div class="pg-dot"></div><div class="pg-time">15 h</div><div class="pg-txt">Table ronde « Les nouveaux visages de la politique locale »</div></div>
       <div id="pg-r3" class="pg-row"><div class="pg-dot"></div><div class="pg-time">16 h</div><div class="pg-txt">Conférence flash de l'Association des Maires de France</div></div>
-      <div id="pg-r4" class="pg-row"><div class="pg-dot"></div><div class="pg-time">17 h</div><div class="pg-txt">Échanges avec l'IFOP<small>Les Français et la politique, à six mois de la présidentielle</small></div></div>
+      <div id="pg-r4" class="pg-row"><div class="pg-dot"></div><div class="pg-time">17 h</div><div class="pg-txt">Échanges avec l'IFOP</div></div>
       <div id="pg-r5" class="pg-row"><div class="pg-dot"></div><div class="pg-time">18 h</div><div class="pg-txt">Lancement des commissions thématiques</div></div>
     </div>
   </div>
@@ -119,18 +119,18 @@
       tl.fromTo("#pg-list", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" }, 0.45);
 
       // The rail draws down as the afternoon goes by.
-      tl.fromTo("#pg-rail", { scaleY: 0, transformOrigin: "50% 0%" }, { scaleY: 1, duration: 5.6, ease: "none" }, 0.8);
+      tl.fromTo("#pg-rail", { scaleY: 0, transformOrigin: "50% 0%" }, { scaleY: 1, duration: 4.8, ease: "none" }, 0.8);
 
       const rows = ["#pg-r1", "#pg-r2", "#pg-r3", "#pg-r4", "#pg-r5"];
       rows.forEach((r) => gsap.set([r + " .pg-time", r + " .pg-txt", r + " .pg-dot"], { opacity: 0 }));
       rows.forEach((r, i) => {
-        const t = 0.9 + i * 1.35;
+        const t = 0.8 + i * 1.15;
         tl.fromTo(r + " .pg-dot", { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.5)" }, t);
         tl.fromTo(r + " .pg-time", { opacity: 0, x: -60, filter: "blur(8px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.4, ease: "expo.out" }, t + 0.05);
         tl.fromTo(r + " .pg-txt", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, t + 0.2);
       });
 
-      tl.to(["#pg-head", "#pg-list"], { opacity: 0, y: -80, filter: "blur(10px)", duration: 0.3, stagger: 0.05, ease: "power3.in" }, 8.0);
+      tl.to(["#pg-head", "#pg-list"], { opacity: 0, y: -80, filter: "blur(10px)", duration: 0.3, stagger: 0.05, ease: "power3.in" }, 6.65);
       window.__timelines["programme"] = tl;
     })();
   </script>

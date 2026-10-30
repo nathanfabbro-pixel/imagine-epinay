@@ -15,31 +15,58 @@
     }
     .ac-flash {
       position: absolute;
-      width: 1400px;
-      height: 1400px;
+      width: 1500px;
+      height: 1500px;
       border-radius: 50%;
       opacity: 0;
     }
     #ac-flash-r {
-      left: 200px;
-      top: 500px;
+      left: 100px;
+      top: 300px;
       background: radial-gradient(circle, #ef4135 0%, rgba(239, 65, 53, 0) 60%);
     }
     #ac-flash-b {
-      left: -500px;
-      top: 300px;
+      left: -520px;
+      top: 0px;
       background: radial-gradient(circle, #3d6bff 0%, rgba(61, 107, 255, 0) 60%);
     }
+    #ac-white {
+      position: absolute;
+      inset: 0;
+      background: #ffffff;
+      opacity: 0;
+    }
+    #ac-streaks {
+      position: absolute;
+      left: -260px;
+      top: 700px;
+      width: 1600px;
+      height: 300px;
+    }
+    .ac-streak {
+      position: absolute;
+      left: 0;
+      width: 1600px;
+      height: 22px;
+      border-radius: 11px;
+    }
+    #ac-s1 { top: 60px; background: linear-gradient(90deg, rgba(61, 107, 255, 0), #3d6bff 40%, rgba(61, 107, 255, 0)); }
+    #ac-s2 { top: 130px; background: linear-gradient(90deg, rgba(255, 255, 255, 0), #ffffff 40%, rgba(255, 255, 255, 0)); }
+    #ac-s3 { top: 200px; background: linear-gradient(90deg, rgba(239, 65, 53, 0), #ef4135 40%, rgba(239, 65, 53, 0)); }
     #ac-title {
       position: absolute;
-      left: 72px;
-      right: 72px;
-      top: 560px;
+      left: 0;
+      right: 0;
+      top: 690px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
     #ac-bienvenue {
       font-family: "Unbounded", sans-serif;
       font-weight: 900;
-      font-size: 124px;
+      font-size: 128px;
       line-height: 0.92;
       letter-spacing: -5px;
       white-space: nowrap;
@@ -47,23 +74,35 @@
     #ac-ajef {
       font-family: "Instrument Serif", serif;
       font-style: italic;
-      font-size: 190px;
+      font-size: 200px;
       line-height: 0.95;
       letter-spacing: -2px;
-      padding-left: 72px;
       white-space: nowrap;
     }
     #ac-ajef .l {
       display: inline-block;
     }
     #ac-bang {
+      position: relative;
       display: inline-block;
       color: #ff7a73;
+    }
+    #ac-ring {
+      position: absolute;
+      left: 50%;
+      top: 55%;
+      width: 160px;
+      height: 160px;
+      margin: -80px 0 0 -80px;
+      border-radius: 50%;
+      border: 8px solid #ff7a73;
+      opacity: 0;
     }
     #ac-sub {
       margin-top: 36px;
       display: flex;
       flex-direction: column;
+      align-items: center;
       gap: 10px;
     }
     #ac-sub-caps {
@@ -81,17 +120,18 @@
     }
     #ac-verbs {
       position: absolute;
-      left: 72px;
-      right: 72px;
-      top: 760px;
+      left: 0;
+      right: 0;
+      top: 820px;
       display: flex;
       flex-direction: column;
+      align-items: center;
       gap: 26px;
     }
     .ac-verb {
       font-family: "Unbounded", sans-serif;
       font-weight: 800;
-      font-size: 84px;
+      font-size: 88px;
       line-height: 1.05;
       letter-spacing: -2px;
       white-space: nowrap;
@@ -100,10 +140,15 @@
   <div id="root" data-composition-id="accroche" data-width="1080" data-height="1920">
     <div id="ac-flash-b" class="ac-flash" data-layout-ignore></div>
     <div id="ac-flash-r" class="ac-flash" data-layout-ignore></div>
+    <div id="ac-streaks" data-layout-ignore>
+      <div id="ac-s1" class="ac-streak"></div>
+      <div id="ac-s2" class="ac-streak"></div>
+      <div id="ac-s3" class="ac-streak"></div>
+    </div>
 
     <div id="ac-title" data-layout-allow-overflow>
       <div id="ac-bienvenue">BIENVENUE</div>
-      <div id="ac-ajef"><span class="l">à</span> <span class="l">l'</span><span class="l">A</span><span class="l">J</span><span class="l">E</span><span class="l">F</span><span id="ac-bang">&nbsp;!</span></div>
+      <div id="ac-ajef"><span class="l">à</span> <span class="l">l'</span><span class="l">A</span><span class="l">J</span><span class="l">E</span><span class="l">F</span><span id="ac-bang">&nbsp;!<span id="ac-ring"></span></span></div>
       <div id="ac-sub">
         <div id="ac-sub-caps">Journée d'accueil</div>
         <div id="ac-sub-it">des jeunes élus de France</div>
@@ -115,31 +160,49 @@
       <div id="ac-v2" class="ac-verb">Échanger.</div>
       <div id="ac-v3" class="ac-verb">S'engager.</div>
     </div>
+
+    <div id="ac-white" data-layout-ignore></div>
   </div>
   <script>
     (function () {
       const tl = gsap.timeline({ paused: true });
       const letters = Array.from(document.querySelectorAll("#ac-ajef .l"));
 
-      // « BIENVENUE » is on screen from frame 0; « à l'AJEF » writes itself in.
-      tl.fromTo(letters, { opacity: 0, y: 40, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.35, stagger: 0.06, ease: "expo.out" }, 0.2);
-      tl.fromTo("#ac-bang", { opacity: 0, scale: 0.2, rotation: -20 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.5, ease: "back.out(2.2)" }, 0.75);
-      tl.fromTo("#ac-sub-caps", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.4, ease: "expo.out" }, 0.9);
-      tl.fromTo("#ac-sub-it", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, 1.0);
+      // Frame 0: « BIENVENUE » fills the screen, then slams down into place.
+      tl.fromTo("#ac-bienvenue", { scale: 1.75, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.42, ease: "expo.out" }, 0);
+      // Impact: a white flash, both halos fire, the tricolour streaks whip across.
+      tl.fromTo("#ac-white", { opacity: 0 }, { opacity: 0.38, duration: 0.05, ease: "none" }, 0.12);
+      tl.to("#ac-white", { opacity: 0, duration: 0.3, ease: "power2.out" }, 0.17);
+      tl.fromTo(["#ac-flash-b", "#ac-flash-r"], { opacity: 0 }, { opacity: 0.7, duration: 0.15, ease: "power2.out" }, 0.12);
+      tl.to(["#ac-flash-b", "#ac-flash-r"], { opacity: 0, duration: 0.9, ease: "power2.inOut" }, 0.3);
+      ["#ac-s1", "#ac-s2", "#ac-s3"].forEach((s, i) => {
+        tl.fromTo(s, { x: -1700 }, { x: 1700, duration: 0.55, ease: "power3.inOut" }, 0.1 + i * 0.07);
+      });
+
+      // « à l'AJEF » drops in letter by letter, the « ! » lands with a ring.
+      tl.fromTo(letters, { opacity: 0, y: -120, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.4, stagger: 0.05, ease: "back.out(1.6)" }, 0.4);
+      tl.fromTo("#ac-bang", { opacity: 0, scale: 0.2, rotation: -25 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.5, ease: "back.out(2.6)" }, 0.85);
+      tl.fromTo("#ac-ring", { opacity: 1, scale: 0.3 }, { opacity: 0, scale: 3, duration: 0.6, ease: "power2.out" }, 0.95);
+      // A small punch-in of the whole title on the « ! ».
+      tl.fromTo("#ac-title", { scale: 1 }, { scale: 1.05, duration: 0.08, ease: "power2.out", transformOrigin: "50% 40%" }, 0.95);
+      tl.to("#ac-title", { scale: 1, duration: 0.35, ease: "power3.out" }, 1.03);
+
+      tl.fromTo("#ac-sub-caps", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: "expo.out" }, 1.1);
+      tl.fromTo("#ac-sub-it", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, 1.2);
 
       // Carry across: the title rises and shrinks to make room for the promise.
-      tl.to("#ac-sub", { opacity: 0, filter: "blur(8px)", duration: 0.2, ease: "power2.in" }, 2.55);
-      tl.to("#ac-title", { y: -230, scale: 0.62, transformOrigin: "0% 0%", duration: 0.6, ease: "power3.inOut" }, 2.6);
+      tl.to("#ac-sub", { opacity: 0, filter: "blur(8px)", duration: 0.2, ease: "power2.in" }, 2.6);
+      tl.to("#ac-title", { y: -260, scale: 0.62, transformOrigin: "50% 0%", duration: 0.55, ease: "power3.inOut" }, 2.65);
 
-      // Three verbs, one per beat; each lands with a halo, the previous dims.
+      // Three verbs slam in, one per beat; each lands with a halo, the previous dims.
       const verbs = ["#ac-v1", "#ac-v2", "#ac-v3"];
       const flashes = ["#ac-flash-r", "#ac-flash-b", "#ac-flash-r"];
       gsap.set(verbs, { opacity: 0 });
       verbs.forEach((v, i) => {
-        const t = 3.0 + i * 0.6;
-        tl.fromTo(v, { opacity: 0, x: 120, filter: "blur(12px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.4, ease: "expo.out" }, t);
-        tl.fromTo(flashes[i], { opacity: 0 }, { opacity: 0.55, duration: 0.25, ease: "power2.out" }, t);
-        tl.to(flashes[i], { opacity: 0, duration: 0.6, ease: "power2.inOut" }, t + 0.35);
+        const t = 3.05 + i * 0.6;
+        tl.fromTo(v, { opacity: 0, scale: 1.6, filter: "blur(12px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.35, ease: "expo.out" }, t);
+        tl.fromTo(flashes[i], { opacity: 0 }, { opacity: 0.55, duration: 0.2, ease: "power2.out" }, t);
+        tl.to(flashes[i], { opacity: 0, duration: 0.5, ease: "power2.inOut" }, t + 0.3);
         if (i > 0) tl.to(verbs[i - 1], { opacity: 0.38, duration: 0.3, ease: "power2.out" }, t);
       });
 
