@@ -547,9 +547,9 @@ footer{background:var(--encre);color:rgba(255,255,255,.4);padding:3rem 4rem;}
       </div>
     </div>
     <div>
-      <!-- FORMSPREE : remplacez VOTRE_ID_FORMSPREE par votre identifiant -->
-      <form action="https://formspree.io/f/meebozdz" method="POST" id="contactForm">
-        <input type="hidden" name="_subject" value="Nouveau message depuis le site Imagine Épinay">
+      <form name="contact" action="/merci" method="POST" id="contactForm" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="subject" value="Nouveau message depuis le site Imagine Épinay">
+        <p style="position:absolute;left:-9999px;"><label>Ne pas remplir : <input name="bot-field"></label></p>
         <div class="cfg-row">
           <div class="cfg"><label>Prénom</label><input type="text" name="prenom" placeholder="Marie" required></div>
           <div class="cfg"><label>Nom</label><input type="text" name="nom" placeholder="Dupont" required></div>
@@ -568,6 +568,7 @@ footer{background:var(--encre);color:rgba(255,255,255,.4);padding:3rem 4rem;}
         </div>
         <div class="cfg"><label>Votre message</label><textarea name="message" id="msgField" placeholder="Votre message…" required></textarea></div>
         <button type="submit" class="btn-send">Envoyer mon message →</button>
+        <p style="font-size:.75rem;color:var(--gris);margin-top:.8rem;line-height:1.5;">Vos données servent uniquement à vous répondre. Elles sont traitées par les élus d'Imagine Épinay et ne sont transmises à personne d'autre. <a href="/confidentialite" style="color:var(--violet);">En savoir plus</a></p>
       </form>
     </div>
   </div>
@@ -576,10 +577,15 @@ footer{background:var(--encre);color:rgba(255,255,255,.4);padding:3rem 4rem;}
 <!-- NEWSLETTER -->
 <div class="newsletter">
   <div><h3>📬 Restez informé·e</h3><p>Recevez nos actualités et les résultats des consultations. Sans spam.</p></div>
-  <div class="nl-form">
-    <input type="email" placeholder="votre@email.fr" id="nlEmail">
-    <button class="btn-nl" onclick="showToast('✉️ Merci ! Inscription enregistrée.')">S'abonner</button>
-  </div>
+  <form class="nl-form" name="actualites" action="/merci" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="flex-direction:column;align-items:flex-start;">
+    <p style="position:absolute;left:-9999px;"><label>Ne pas remplir : <input name="bot-field"></label></p>
+    <div style="display:flex;gap:.7rem;flex-wrap:wrap;">
+      <label for="nlEmail" style="position:absolute;left:-9999px;">Adresse e-mail</label>
+      <input type="email" name="email" placeholder="votre@email.fr" id="nlEmail" required>
+      <button class="btn-nl" type="submit">S'abonner</button>
+    </div>
+    <label style="display:flex;gap:.5rem;align-items:flex-start;font-size:.78rem;max-width:460px;line-height:1.45;opacity:.9;"><input type="checkbox" name="consentement" value="oui" required style="margin-top:.2rem;flex-shrink:0;"><span>J'accepte de recevoir par e-mail les actualités d'Imagine Épinay. Je peux me désinscrire à tout moment. <a href="/confidentialite" style="color:white;text-decoration:underline;">Confidentialité</a></span></label>
+  </form>
 </div>
 
 <!-- FOOTER -->
@@ -599,13 +605,13 @@ footer{background:var(--encre);color:rgba(255,255,255,.4);padding:3rem 4rem;}
     <div class="ft-col">
       <h4>Informations</h4>
       <a href="mailto:imagineepinay@gmail.com">Nous écrire</a>
-      <a onclick="showToast('Page bientôt disponible')">Mentions légales</a>
-      <a onclick="showToast('Page bientôt disponible')">Confidentialité</a>
+      <a href="/mentions-legales">Mentions légales</a>
+      <a href="/confidentialite">Confidentialité</a>
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2025 Imagine Épinay-sur-Orge</span>
-    <span>Site citoyen · Données protégées</span>
+    <span>© 2026 Imagine Épinay · Groupe d'élus d'opposition à Épinay-sur-Orge</span>
+    <span><a href="/mentions-legales" style="color:inherit;">Mentions légales</a> · <a href="/confidentialite" style="color:inherit;">Confidentialité</a></span>
   </div>
 </footer>
 
@@ -619,9 +625,9 @@ footer{background:var(--encre);color:rgba(255,255,255,.4);padding:3rem 4rem;}
     </div>
     <h3>Donner mon avis</h3>
     <p class="modal-sub" id="avisSujet">Consultation</p>
-    <!-- FORMSPREE : même ID que le formulaire de contact -->
-    <form action="https://formspree.io/f/VOTRE_ID_FORMSPREE" method="POST">
-      <input type="hidden" name="_subject" value="Nouvel avis citoyen — Imagine Épinay">
+    <form name="avis" action="/merci" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="subject" value="Nouvel avis citoyen — Imagine Épinay">
+      <p style="position:absolute;left:-9999px;"><label>Ne pas remplir : <input name="bot-field"></label></p>
       <input type="hidden" name="consultation" id="avisHidden" value="">
       <div class="cfg-row">
         <div class="cfg"><label>Prénom</label><input type="text" name="prenom" placeholder="Marie" required></div>
@@ -630,6 +636,7 @@ footer{background:var(--encre);color:rgba(255,255,255,.4);padding:3rem 4rem;}
       <div class="cfg"><label>Email</label><input type="email" name="email" placeholder="marie@exemple.fr" required></div>
       <div class="cfg"><label>Votre avis sur ce sujet</label><textarea name="message" placeholder="Partagez votre opinion, vos idées…" required></textarea></div>
       <button type="submit" class="btn-send">Envoyer mon avis →</button>
+      <p style="font-size:.75rem;color:var(--gris);margin-top:.8rem;line-height:1.5;">Vos données servent uniquement à prendre en compte votre avis et, si besoin, à vous répondre. Elles sont traitées par les élus d'Imagine Épinay et ne sont transmises à personne d'autre. <a href="/confidentialite" style="color:var(--violet);">En savoir plus</a></p>
     </form>
   </div>
 </div>
