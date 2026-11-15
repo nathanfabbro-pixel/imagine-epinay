@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Imagine Epinay//Reunion publique//FR
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:reunion-publique-data-center-20261130@imagineepinay.fr
+DTSTAMP:20261115T200000Z
+DTSTART:20261130T193000Z
+DTEND:20261130T210000Z
+SUMMARY:Réunion publique – data center de Ballainvilliers (Imagine Épinay)
+DESCRIPTION:Réunion publique d'information en visio. Lien Teams : https://teams.live.com/meet/9348149698281?p=iCWJAbNuFFFayZwNS0
+LOCATION:https://teams.live.com/meet/9348149698281?p=iCWJAbNuFFFayZwNS0
+URL:https://teams.live.com/meet/9348149698281?p=iCWJAbNuFFFayZwNS0
+BEGIN:VALARM
+TRIGGER:-PT1H
+ACTION:DISPLAY
+DESCRIPTION:Réunion publique data center dans 1 heure
+END:VALARM
+END:VEVENT
+END:VCALENDAR
